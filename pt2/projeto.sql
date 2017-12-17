@@ -1,3 +1,82 @@
+CREATE TABLE Bacia (
+	idBacia int NOT NULL PRIMARY KEY,
+	nome varchar(255),
+	area float(2),
+	perimetro float(2)
+);
+
+/*Relação: Bacia(1) - Rio(n)*/
+CREATE TABLE Rio (
+
+	FOREIGN KEY (idBacia) references Bacia (idBacia)
+	idRio int NOT NULL PRIMARY KEY,
+	nome varchar(255),
+	indicativo varchar(255) NOT NULL
+);
+
+CREATE TABLE EstacaoDeQualidade (
+	idEstacaoQualidade int NOT NULL PRIMARY KEY,
+	nome varchar(255),
+	latitude float(2),
+	longitude float(2)
+);
+
+/*Relacacao: estacaodequalidade - mede*/
+/*Relacacao: medicao - rio*/
+/*Relacacao: medicao - acude*/
+CREATE TABLE Medicao (
+	data date NOT NULL, 
+	ph float(2) NOT NULL,
+	dbo float(2) NOT NULL,
+	turbidez INT NOT NULL,
+	oxigenio float(2) NOT NULL,
+	alcalinidade float(2) NOT NULL
+	idEstacaoQualidade int FOREIGN KEY references EstacaoDeQualidade(idEstacaoQualidade),
+	idRio int FOREIGN KEY references Rio(idRio) 
+	idAcude int FOREIGN KEY references Acude(idAcude)
+	--TODO: vê se da pra usar esta mesma tabela na medicao do açude
+	
+);
+
+
+/*Adicinado chave estrangeira de Rio (rio-açude)*/
+CREATE TABLE Acude (
+	idAcude int NOT NULL PRIMARY KEY,
+	nome varchar(255),
+	volumeMaximo float(2),
+	comprimento float(2), 
+	area float(2),
+	FOREIGN KEY (idRio) references Rio (idRio)
+);
+
+/*Relação: acude(1) - CotaAreaVolume(n)*/
+CREATE TABLE CotaAreaVolume (
+	idCAV int NOT NULL PRIMARY KEY,
+	cota float(2),
+	area float(2),
+	volume float(2),
+	FOREIGN KEY (idAcude) references Acude (idAcude)
+);
+
+
+
+/*Relação medicao(n) - acude(1)*/
+/*Relação medicao(n) - usuario(1)*/
+CREATE TABLE MedicaoCotaDiaria (
+	idMedicaoDiaria int NOT NULL PRIMARY KEY,
+	cotaAtual float(2),
+	datas date,
+	FOREIGN KEY (idAcude) references Acude (idAcude),
+	FOREIGN KEY (matricula) references Usuario (matricula)
+);
+
+CREATE TABLE Usuario (
+	matricula int NOT NULL PRIMARY KEY,
+	nome varchar(255),
+	telefones int
+);
+
+/*Relação: PostoPluviometrico(n) - bacia(1)*/
 CREATE TABLE PostoPluviometrico (
 	idPostoPluviométrico int NOT NULL PRIMARY KEY,
 	nome varchar(255),
@@ -6,50 +85,14 @@ CREATE TABLE PostoPluviometrico (
 	endereco_bairro varchar(255),
 	endereco_municipio varchar(255),
 	endereco_estado varchar(255),
+	FOREIGN KEY (idBacia) references Bacia (idBacia),
 );
 
-CREATE TABLE Bacia (
-	idBacia int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	area double,
-	perimetro double,
-);
-
-CREATE TABLE EstacaoDeQualidade (
-	idEstacaoQualidade int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	latitude double,
-	longitude double,
-);
-
-CREATE TABLE Rio (
-	idRio int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	indicativo varchar(255),
-);
-
-CREATE TABLE Acude (
-	idAcude int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	volumeMaximo double,
-	comprimento double, 
-	area double,
-);
-
-CREATE TABLE CotaAreaVolume (
-	idCAV int NOT NULL PRIMARY KEY,
-	cota double,
-	area double,
-	volume double,
-);
-
-CREATE TABLE MedicaoCotaDiaria (
-	idMedicaoDiaria int NOT NULL PRIMARY KEY,
-	cotaAtual double,
-	datas date,
-);
-
+/*Relação: medicaoPluviometrica(n) - usuario(1)*/
+/*Relação: medicaoPluviometrica(n) - postoPluviometrico(1)*/
 CREATE TABLE MedicaoPluviometrica (
+	idPostoPluviométrico INT FOREIGN KEY references PostoPluviometrico(idPostoPluviométrico),
+	matricula INT FOREIGN KEY references Usuario(matricula),
 	idMedicao int NOT NULL PRIMARY KEY,
 	datas date,
 	valor_chuva_dia_1 float(2),
@@ -82,11 +125,17 @@ CREATE TABLE MedicaoPluviometrica (
 	valor_chuva_dia_28 float(2),
 	valor_chuva_dia_29 float(2),
 	valor_chuva_dia_30 float(2),
-	valor_chuva_dia_31 float(2),
+	valor_chuva_dia_31 float(2)
 );
 
-CREATE TABLE Usuario (
-	matricula int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	telefones int,
-);
+
+DROP TABLE Usuario; 
+DROP TABLE MedicaoPluviometrica;
+DROP TABLE PostoPluviometrico;
+DROP TABLE Bacia; 
+DROP TABLE Acude; 
+DROP TABLE Rio; 
+DROP TABLE EstacaoDeQualidade; 
+DROP TABLE MedicaoCotaDiaria; 
+DROP TABLE CotaAreaVolume; 
+DROP TABLE Medicao; 
