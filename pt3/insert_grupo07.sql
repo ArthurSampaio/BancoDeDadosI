@@ -73,11 +73,11 @@ INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, id
 INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (4,'estacao 4', 8686, 822,  4, 1);
 INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (5,'estacao 5', 777, 3535,  4, 2);
 
-INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (1,'01/02/2018', 4, 7,  8, 3,4,1,1);
-INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (2,'07/01/2018', 5, 6,  7, 4,5,4,3);
-INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (3,'17/01/2017', 6, 5,  6, 5,5,2,5);
-INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (4,'11/01/2018', 7, 4,  5, 6,4,4,2);
-INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (5,'31/01/2018', 8, 3,  4, 7,4,1,2);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (1,'11/10/2017', 4, 7,  8, 3,4,1,1);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (2,'07/11/2011', 5, 6,  7, 4,5,4,3);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (3,'17/11/2017', 6, 5,  6, 5,5,2,5);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (4,'11/10/2017', 7, 4,  5, 6,4,4,2);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (5,'31/10/2017', 8, 3,  4, 7,4,1,2);
 
 INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (1,'01/01/2018', 4, 7,  8, 3,4,1,1);
 INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (2,'06/01/2018', 5, 6,  7, 4,5,4,3);
