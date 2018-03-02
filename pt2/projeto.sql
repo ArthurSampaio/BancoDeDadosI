@@ -1,141 +1,206 @@
+-- REMOVENDO TODAS INFORMACOES
+
+BEGIN
+FOR cur_rec IN (SELECT object_name, object_type
+  FROM user_objects
+  WHERE object_type IN
+	 ('TABLE',
+	  'VIEW',
+	  'TRIGGER'
+	 ))
+  LOOP
+    BEGIN
+      IF cur_rec.object_type = 'TABLE' THEN
+        EXECUTE IMMEDIATE    'DROP '
+		  || cur_rec.object_type
+		  || ' "'
+		  || cur_rec.object_name
+		  || '" CASCADE CONSTRAINTS';
+      ELSE
+        EXECUTE IMMEDIATE    'DROP '
+		  || cur_rec.object_type
+		  || ' "'
+		  || cur_rec.object_name
+		  || '"';
+	  END IF;
+      EXCEPTION
+        WHEN OTHERS THEN
+          DBMS_OUTPUT.put_line (   'FAILED: DROP '
+		  || cur_rec.object_type
+		  || ' "'
+		  || cur_rec.object_name
+		  || '"'
+   		  );
+    END;
+  END LOOP;
+END;
+/
+-- CRIANDO TABELAS
+
 CREATE TABLE Bacia (
-	idBacia int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	area float(2),
-	perimetro float(2)
+	idBacia                 INTEGER NOT NULL,
+	nome                    VARCHAR(255),
+	area                    NUMBER,
+	perimetro               NUMBER,
+    PRIMARY KEY (idBacia)
 );
 
-/*Relação: Bacia(1) - Rio(n)*/
-CREATE TABLE Rio (
-
-	FOREIGN KEY (idBacia) references Bacia (idBacia)
-	idRio int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	indicativo varchar(255) NOT NULL
-);
-
-CREATE TABLE EstacaoDeQualidade (
-	idEstacaoQualidade int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	latitude float(2),
-	longitude float(2)
-);
-
-/*Relacacao: estacaodequalidade - mede*/
-/*Relacacao: medicao - rio*/
-/*Relacacao: medicao - acude*/
-CREATE TABLE Medicao (
-	data date NOT NULL, 
-	ph float(2) NOT NULL,
-	dbo float(2) NOT NULL,
-	turbidez INT NOT NULL,
-	oxigenio float(2) NOT NULL,
-	alcalinidade float(2) NOT NULL
-	idEstacaoQualidade int FOREIGN KEY references EstacaoDeQualidade(idEstacaoQualidade),
-	idRio int FOREIGN KEY references Rio(idRio) 
-	idAcude int FOREIGN KEY references Acude(idAcude)
-	--TODO: vê se da pra usar esta mesma tabela na medicao do açude
-	
-);
-
-
-/*Adicinado chave estrangeira de Rio (rio-açude)*/
-CREATE TABLE Acude (
-	idAcude int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	volumeMaximo float(2),
-	comprimento float(2), 
-	area float(2),
-	FOREIGN KEY (idRio) references Rio (idRio)
-);
-
-/*Relação: acude(1) - CotaAreaVolume(n)*/
-CREATE TABLE CotaAreaVolume (
-	idCAV int NOT NULL PRIMARY KEY,
-	cota float(2),
-	area float(2),
-	volume float(2),
-	FOREIGN KEY (idAcude) references Acude (idAcude)
-);
-
-
-
-/*Relação medicao(n) - acude(1)*/
-/*Relação medicao(n) - usuario(1)*/
-CREATE TABLE MedicaoCotaDiaria (
-	idMedicaoDiaria int NOT NULL PRIMARY KEY,
-	cotaAtual float(2),
-	datas date,
-	FOREIGN KEY (idAcude) references Acude (idAcude),
-	FOREIGN KEY (matricula) references Usuario (matricula)
+CREATE TABLE PostoPluviometrico (
+	idPostoPluviometrico     INTEGER NOT NULL,
+	nome                     VARCHAR(255),
+	endereco_rua             VARCHAR(255),
+	endereco_num             VARCHAR(255),
+	endereco_bairro          VARCHAR(255),
+	endereco_municipio       VARCHAR(255),
+	endereco_estado          VARCHAR(255),
+    idBacia                  INTEGER NOT NULL,
+    FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia),
+    PRIMARY KEY (idPostoPluviometrico)
 );
 
 CREATE TABLE Usuario (
-	matricula int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	telefones int
+	matricula                INTEGER NOT NULL,
+	nome                     VARCHAR(255),
+	telefones                VARCHAR(255),
+    FOREIGN KEY (matricula) REFERENCES usuario(matricula),    
+    PRIMARY KEY (matricula)
 );
 
-/*Relação: PostoPluviometrico(n) - bacia(1)*/
-CREATE TABLE PostoPluviometrico (
-	idPostoPluviométrico int NOT NULL PRIMARY KEY,
-	nome varchar(255),
-	endereco_rua varchar(255),
-	endereco_num varchar(255),
-	endereco_bairro varchar(255),
-	endereco_municipio varchar(255),
-	endereco_estado varchar(255),
-	FOREIGN KEY (idBacia) references Bacia (idBacia),
-);
-
-/*Relação: medicaoPluviometrica(n) - usuario(1)*/
-/*Relação: medicaoPluviometrica(n) - postoPluviometrico(1)*/
 CREATE TABLE MedicaoPluviometrica (
-	idPostoPluviométrico INT FOREIGN KEY references PostoPluviometrico(idPostoPluviométrico),
-	matricula INT FOREIGN KEY references Usuario(matricula),
-	idMedicao int NOT NULL PRIMARY KEY,
-	datas date,
-	valor_chuva_dia_1 float(2),
-	valor_chuva_dia_2 float(2),
-	valor_chuva_dia_3 float(2),
-	valor_chuva_dia_4 float(2),
-	valor_chuva_dia_5 float(2),
-	valor_chuva_dia_6 float(2),
-	valor_chuva_dia_7 float(2),
-	valor_chuva_dia_8 float(2),
-	valor_chuva_dia_9 float(2),
-	valor_chuva_dia_10 float(2),
-	valor_chuva_dia_11 float(2),
-	valor_chuva_dia_12 float(2),
-	valor_chuva_dia_13 float(2),
-	valor_chuva_dia_14 float(2),
-	valor_chuva_dia_15 float(2),
-	valor_chuva_dia_16 float(2),
-	valor_chuva_dia_17 float(2),
-	valor_chuva_dia_18 float(2),
-	valor_chuva_dia_19 float(2),
-	valor_chuva_dia_20 float(2),
-	valor_chuva_dia_21 float(2),
-	valor_chuva_dia_22 float(2),
-	valor_chuva_dia_23 float(2),
-	valor_chuva_dia_24 float(2),
-	valor_chuva_dia_25 float(2),
-	valor_chuva_dia_26 float(2),
-	valor_chuva_dia_27 float(2),
-	valor_chuva_dia_28 float(2),
-	valor_chuva_dia_29 float(2),
-	valor_chuva_dia_30 float(2),
-	valor_chuva_dia_31 float(2)
+	idMedicao                INTEGER NOT NULL,
+	datas                    DATE NOT NULL,
+	valor_chuva_dia_1        NUMBER,
+	valor_chuva_dia_2        NUMBER,
+	valor_chuva_dia_3        NUMBER,
+	valor_chuva_dia_4        NUMBER,
+	valor_chuva_dia_5        NUMBER,
+	valor_chuva_dia_6        NUMBER,
+	valor_chuva_dia_7        NUMBER,
+	valor_chuva_dia_8        NUMBER,
+	valor_chuva_dia_9        NUMBER,
+	valor_chuva_dia_10       NUMBER,
+	valor_chuva_dia_11       NUMBER,
+	valor_chuva_dia_12       NUMBER,
+	valor_chuva_dia_13       NUMBER,
+	valor_chuva_dia_14       NUMBER,
+	valor_chuva_dia_15       NUMBER,
+	valor_chuva_dia_16       NUMBER,
+	valor_chuva_dia_17       NUMBER,
+	valor_chuva_dia_18       NUMBER,
+	valor_chuva_dia_19       NUMBER,
+	valor_chuva_dia_20       NUMBER,
+	valor_chuva_dia_21       NUMBER,
+	valor_chuva_dia_22       NUMBER,
+	valor_chuva_dia_23       NUMBER,
+	valor_chuva_dia_24       NUMBER,
+	valor_chuva_dia_25       NUMBER,
+	valor_chuva_dia_26       NUMBER,
+	valor_chuva_dia_27       NUMBER,
+	valor_chuva_dia_28       NUMBER,
+	valor_chuva_dia_29       NUMBER,
+	valor_chuva_dia_30       NUMBER,
+	valor_chuva_dia_31       NUMBER,
+    idPostoPluviometrico     INTEGER NOT NULL,     
+    matricula                INTEGER NOT NULL, 
+    FOREIGN KEY (idPostoPluviometrico) REFERENCES PostoPluviometrico(idPostoPluviometrico),     
+    FOREIGN KEY (matricula) REFERENCES Usuario(matricula),
+    PRIMARY KEY (idMedicao)    
 );
 
+CREATE TABLE telefone_usuario (    
+    matricula                INTEGER NOT NULL,    
+    numero                   VARCHAR(11),    
+    PRIMARY KEY(matricula, numero),  
+    FOREIGN KEY (matricula) REFERENCES Usuario(matricula)    
+);
 
-DROP TABLE Usuario; 
-DROP TABLE MedicaoPluviometrica;
-DROP TABLE PostoPluviometrico;
-DROP TABLE Bacia; 
-DROP TABLE Acude; 
-DROP TABLE Rio; 
-DROP TABLE EstacaoDeQualidade; 
-DROP TABLE MedicaoCotaDiaria; 
-DROP TABLE CotaAreaVolume; 
-DROP TABLE Medicao; 
+CREATE TABLE Rio (
+	idRio                    INTEGER NOT NULL,
+	nome                     VARCHAR(255),
+	indicativo               VARCHAR(255),
+    idBacia                  INTEGER NOT NULL,
+    FOREIGN KEY (idBacia) REFERENCES Bacia(idBacia),
+    PRIMARY KEY (idRio)
+);
+
+CREATE TABLE Acude (
+	idAcude                  INTEGER NOT NULL,
+	nome                     VARCHAR(255),
+	volumeMaximo             NUMBER,
+	comprimento              NUMBER, 
+	area                     NUMBER,
+    idRio                    INTEGER NOT NULL,
+    FOREIGN KEY (idRio) REFERENCES Rio(idRio),
+    PRIMARY KEY (idAcude)
+);
+
+CREATE TABLE MedicaoCotaDiaria (
+	idMedicaoDiaria          INTEGER NOT NULL,
+	cotaAtual                INTEGER,
+	datas                    DATE NOT NULL,
+    matricula                INTEGER NOT NULL,      
+    idAcude                  INTEGER NOT NULL,      
+    FOREIGN KEY (matricula) REFERENCES Usuario(matricula),      
+    FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),   
+    PRIMARY KEY (idMedicaoDiaria)
+);
+
+CREATE TABLE CotaAreaVolume (
+	id                       INTEGER NOT NULL,
+	cota                     INTEGER,
+	area                     INTEGER,
+	volume                   INTEGER,
+    idAcude                  INTEGER NOT NULL, 
+    FOREIGN KEY(idAcude) REFERENCES acude(idAcude),   
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE PostoPluviometrico_Acude(    
+    idAcude                  INTEGER NOT NULL,    
+    idPostoPluviometrico     INTEGER NOT NULL,     
+    FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),    
+    FOREIGN KEY (idPostoPluviometrico) REFERENCES PostoPluviometrico(idPostoPluviometrico),
+    PRIMARY KEY(idAcude, idPostoPluviometrico)
+);
+
+CREATE TABLE EstacaoDeQualidade (
+	idEstacaoQualidade       INTEGER NOT NULL,
+	nome                     VARCHAR(255),
+	latitude                 INTEGER,
+	longitude                INTEGER,
+    idRio                    INTEGER NOT NULL,
+    idAcude                  INTEGER NOT NULL,
+    FOREIGN KEY (idRio) REFERENCES Rio(idRio),
+    FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),
+    PRIMARY KEY (idEstacaoQualidade)
+);
+
+CREATE TABLE MedicaoRio (
+	idMedicaoRio             INTEGER NOT NULL,
+    data                     DATE NOT NULL,
+    pH                       NUMBER(9,2),
+    DBO                      NUMBER(9,2),
+    turbidez                 NUMBER(9,2),
+    oxigenio                 NUMBER(9,2),
+    alcalinidade             NUMBER(9,2),
+    idRio                    INTEGER NOT NULL,
+    idEstacaoQualidade       INTEGER NOT NULL,
+    FOREIGN KEY (idRio) REFERENCES Rio(idRio),
+    FOREIGN KEY (idEstacaoQualidade) REFERENCES EstacaoDeQualidade(idEstacaoQualidade),
+    PRIMARY KEY (idMedicaoRio)
+);
+
+CREATE TABLE MedicaoAcude (
+	idMedicaoAcude           INTEGER NOT NULL,
+    data                     DATE NOT NULL,
+    pH                       NUMBER(9,2),
+    DBO                      NUMBER(9,2),
+    turbidez                 NUMBER(9,2),
+    oxigenio                 NUMBER(9,2),
+    alcalinidade             NUMBER(9,2),
+    idAcude                  INTEGER NOT NULL,
+    idEstacaoQualidade       INTEGER NOT NULL,
+    FOREIGN KEY (idAcude) REFERENCES Acude(idAcude),
+    FOREIGN KEY (idEstacaoQualidade) REFERENCES EstacaoDeQualidade(idEstacaoQualidade),
+    PRIMARY KEY (idMedicaoAcude)
+);
