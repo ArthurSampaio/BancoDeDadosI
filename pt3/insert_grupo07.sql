@@ -1,141 +1,86 @@
-/* Scritp de inserções */
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (1,'Rio Piranhas', 26.049, 30);
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (2,'Rio Paraíba', 20.071, 32);
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (3,'Rio Jacu', 977, 38);
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (4,'Rio Curimataú', 3.313, 35);
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (5,'Rio Camaratuba', 637, 370);
+INSERT INTO Bacia(idBacia, nome, area, perimetro) VALUES (6,'Rio Guaju', 152, 3);
 
-/* Comando de insercao de rows em bacia */
-INSERT INTO Bacia ( idBacia , nome,    area, perimetro) 
-    SELECT               1       ,   'Boqueirao'   ,   12410      , 2680   FROM dual 
-    UNION ALL SELECT     2       ,   'Piranhas'   ,   26047.09    , 2640  FROM dual  
-    UNION ALL SELECT     3       ,   'Mamanguape' ,   3522.69     , 200 FROM dual 
-    UNION ALL SELECT     4       ,   'Jacu'       ,977.31         , 213   FROM dual 
-    UNION ALL SELECT     5       ,   'Gramame'    ,   589.64      , 300  FROM dual  
-    UNION ALL SELECT     6       ,   'Curimatau'  ,    3313.58    , 258  FROM dual
-    UNION ALL SELECT     7       ,   'Camaratuba' ,    637.16     , 258  FROM dual  
-    UNION ALL SELECT     8       ,   'Guaju'      ,    152.62     , 258  FROM dual 
-    UNION ALL SELECT     9       ,   'Miriri'     , 436.19        , 258  FROM dual  
-    UNION ALL SELECT     10       ,   'Trairi'    ,    106.08      , 258  FROM dual 
-    UNION ALL SELECT     11       ,   'Abiai'     ,    585.51, 258  FROM dual    
-;
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (1,'ASPLAN', 'Adenor Silvestre', '78', 'Boa Vista', 'Mamanguape', 'Paraíba' ,1);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (2,'Poço de Pedra', 'José Aldo', '11', 'Mutirão', 'Nova Palmeira', 'Paraíba' ,1);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (3,'Balanços', 'Antonia Bezerra', '48', 'Centro', 'Barbalha', 'Ceará' ,1);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (8,'Terrão', 'Rua 3', '34', 'Centro', 'Maceió', 'Alagoas' ,1);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (4,'Escola Técnica ', 'rua 4', '14', 'Centro', 'Caicó', 'Rio Grande do Norte' ,2);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (5,'Barra do Juá', 'Padre Anchieta', '55', 'Boa Passagem', 'Crato', 'Ceará' ,3);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (6,'Sítio São Vicente', 'sem nome', 'SN', 'Sitio São Vicente', 'Palmeira dos Indios', 'Alagoas' ,4);
+INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome, endereco_rua, endereco_num, endereco_bairro, endereco_municipio, endereco_estado, idBacia) VALUES (7,'São Gonçalo', 'Maria Rita', '91', 'João XXIII', 'Sousa', 'Paraíba' ,2);
 
-/* Comando de insercao de rows em rio */
-INSERT INTO Rio(idRio,   idBacia,     nome,                   indicativo    )
- SELECT           100    , 1,    'Paraíba'        ,    'Permanente'         FROM dual
- UNION ALL SELECT 101    , 2,    'Piranhas-Açu'    ,'Permanent'    FROM dual
- UNION ALL SELECT           103    , 2,    'Piancó'        ,    'Temporario'         FROM dual
- UNION ALL SELECT 104    , 1,    'Taperoá'    ,'Temporario'    FROM dual
- UNION ALL SELECT 105    , 2,    'Espinharas'    ,'Temporario'    FROM dual
- UNION ALL SELECT 106    ,1,    'Sanhauá'    ,'Permanente'    FROM dual
- UNION ALL SELECT 107    , 1,    'Gurinhém'    ,'Temporario'    FROM dual
-  UNION ALL SELECT 108    , 3,    'Mamanguape'    ,'Permanente'    FROM dual
-;
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (1,'João', 16168541651);
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (2,'Maria', 1464615481);
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (3,'José', 6658484);
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (4,'Marcos', 168161);
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (5,'Pedro', 438455151);
+INSERT INTO Usuario(matricula, nome, telefones) VALUES (6,'Jaco', 6584648);
 
-/* Comando de insercao de rows em açude */
-INSERT INTO Acude(idAcude,idRio,nome, volumeMaximo,comprimento, area)
- SELECT               102 ,   100   ,   'Açude de Boqueirao'   ,   411686287    , 1000    ,  1241       FROM dual
- UNION ALL SELECT     200,    101   ,   'Açude de Coremas'     ,   591646222    , 20000   ,  2604.09  FROM dual
- UNION ALL SELECT     201,    101   ,   'Açude de Congo'     ,   250174    , 59851   ,  28957  FROM dual
- UNION ALL SELECT     203 ,   100   ,   'Sumé'   ,   44864100    , 2596    ,  48511       FROM dual
- UNION ALL SELECT     204,    100   ,   'Camalaú'     ,   48107240    , 21314   ,  1204.09  FROM dual
- UNION ALL SELECT     205,    100   ,   'Bodocongó'     ,   3250174    , 5551   ,  12957  FROM dual
- UNION ALL SELECT     206,    101   ,   'Mãe dágua'     ,   567999136    , 5679991   ,  569842  FROM dual
- UNION ALL SELECT     207,    101   ,   'São Gonçalo'     ,   44600000    , 4460000   ,  4460000  FROM dual
-;
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (1,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,1,2);
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (2,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,1,4);
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (3,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,3,5);
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (4,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,5,1);
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (5,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,2,3);
+INSERT INTO MedicaoPluviometrica(idMedicao, datas, valor_chuva_dia_1, valor_chuva_dia_2, valor_chuva_dia_3, valor_chuva_dia_4, valor_chuva_dia_5, valor_chuva_dia_6, valor_chuva_dia_7, valor_chuva_dia_8, valor_chuva_dia_9, valor_chuva_dia_10, valor_chuva_dia_11, valor_chuva_dia_12, valor_chuva_dia_13, valor_chuva_dia_14, valor_chuva_dia_15, valor_chuva_dia_16, valor_chuva_dia_17, valor_chuva_dia_18, valor_chuva_dia_19, valor_chuva_dia_20, valor_chuva_dia_21, valor_chuva_dia_22, valor_chuva_dia_23, valor_chuva_dia_24, valor_chuva_dia_25, valor_chuva_dia_26, valor_chuva_dia_27, valor_chuva_dia_28, valor_chuva_dia_29, valor_chuva_dia_30, valor_chuva_dia_31, idPostoPluviometrico, matricula) VALUES (6,'07/3/2017', 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,2,3);
 
-/* Comando de insercao de rows em usuario */
-INSERT INTO Usuario(matricula,        nome,                   telefones    )
- SELECT           00001    ,     'José Maria'        ,    '87459712'         FROM dual
- UNION ALL SELECT 00002    ,    'Francisco de Assis'    ,'999587432'    FROM dual
- UNION ALL SELECT 00003    ,    'Marcelo Paiva'    ,'999417432'    FROM dual
- UNION ALL SELECT 00004    ,    'Josefa Taveira'    ,'999587415'    FROM dual
- UNION ALL SELECT 00005    ,    'Jair Ventura'    ,'999587137'    FROM dual
- UNION ALL SELECT 00006    ,    'Maria José'    ,'999157432'    FROM dual
- UNION ALL SELECT 00007    ,    'Lourival Lima'    ,'999587001'    FROM dual
- UNION ALL SELECT 00008    ,    'Beatriz Santos'    ,'99901810'    FROM dual
-;
-                   
-/* Comando de insercao de rows em posto pluviometrico */
-INSERT INTO PostoPluviometrico(idPostoPluviometrico, nome,   idBacia,    endereco_rua,        endereco_num,     endereco_bairro,    endereco_municipio,    endereco_estado)
- SELECT               00001 ,      'posto1'  ,      1,          'Adamastor Neves'   ,   '70'   , '   Centro',              'Monteiro',             'Paraíba'       FROM dual
- UNION ALL SELECT     00002,       'posto2' ,        1,          'João R de Lucena'   ,  '24'     ,   'Centro',             'Camalaú',              'Paraíba'  FROM dual
- UNION ALL SELECT     00003,      'posto3' ,         2,          'Arrojado Lisboa'   ,   '9'     ,    'Bela Vista',         'Juazeiro do Norte',    'Ceará' FROM dual
- UNION ALL SELECT     00004,      'posto4' ,         3,          'Floriano Peixoto'   ,  '115'     ,  'Leão Sampaio',       'Barbalha',             'Ceará'  FROM dual
- UNION ALL SELECT     00005,       'posto5',        1,          'Eunice Ribeiro'   ,    '36'     ,   'Centro',             'Queimadas',            'Paraíba'  FROM dual
- 
-;
+INSERT INTO telefone_usuario(matricula, numero) VALUES (1,94826741);
+INSERT INTO telefone_usuario(matricula, numero) VALUES (2,948267451);
+INSERT INTO telefone_usuario(matricula, numero) VALUES (3,94827451);
+INSERT INTO telefone_usuario(matricula, numero) VALUES (4,948745321);
+INSERT INTO telefone_usuario(matricula, numero) VALUES (5,948267451);
+INSERT INTO telefone_usuario(matricula, numero) VALUES (6,948745321);
 
-INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, idRio, idAcude, nome, latitude, longitude)
- 
-     SELECT           00037, 101, 102, 'Estação 35', 587236, 597145 FROM dual
-     UNION ALL SELECT 00001, 101, 200, 'Estação 1', 587526, 597145 FROM dual
-     UNION ALL SELECT 00002, 101, 200, 'Estação 2', 587245, 597145 FROM dual
-     UNION ALL SELECT 00003, 101, 200, 'Estação 3', 587245, 597145 FROM dual
-     UNION ALL SELECT 00004, 101, 200, 'Estação 4', 587236, 577145 FROM dual
-     UNION ALL SELECT 00005, 101, 201, 'Estação 5', 587236, 567145 FROM dual
-     UNION ALL SELECT 00006, 102, 201, 'Estação 6', 587236, 597145 FROM dual
-     UNION ALL SELECT 00007, 102, 201, 'Estação 7', 587236, 527145 FROM dual
-     UNION ALL SELECT 00008, 102, 201, 'Estação 8', 587236, 597145 FROM dual
-     UNION ALL SELECT 00009, 102, 102, 'Estação 9', 587236, 597145 FROM dual
-     UNION ALL SELECT 00010, 102, 102, 'Estação 10', 587236, 997145 FROM dual
-     UNION ALL SELECT 00011, 103, 102, 'Estação 11', 587236, 597145 FROM dual
-     UNION ALL SELECT 00012, 103, 102, 'Estação 12', 587236, 697145 FROM dual
-     UNION ALL SELECT 00013, 103, 102, 'Estação 13', 587236, 597145 FROM dual
-     UNION ALL SELECT 00014, 103, 203, 'Estação 14', 587236, 897145 FROM dual
-     UNION ALL SELECT 00015, 103, 206, 'Estação 15', 587236, 597145 FROM dual
-     UNION ALL SELECT 00016, 104, 206, 'Estação 16', 587236, 597145 FROM dual
-     UNION ALL SELECT 00017, 104, 200, 'Estação 17', 587236, 597145 FROM dual
-     UNION ALL SELECT 00019, 104, 201, 'Estação 18', 587236, 597145 FROM dual
-     UNION ALL SELECT 00020, 104, 201, 'Estação 19', 587236, 597145 FROM dual
-     UNION ALL SELECT 00021, 104, 102, 'Estação 20', 587236, 597145 FROM dual
-     UNION ALL SELECT 00022, 105, 203, 'Estação 21', 587236, 597145 FROM dual
-     UNION ALL SELECT 00023, 105, 203, 'Estação 22', 587236, 597145 FROM dual
-     UNION ALL SELECT 00024, 105, 203, 'Estação 23', 587236, 597145 FROM dual
-     UNION ALL SELECT 00025, 105, 204, 'Estação 24', 587236, 597145 FROM dual
-     UNION ALL SELECT 00026, 105, 204, 'Estação 25', 587236, 597145 FROM dual
-     UNION ALL SELECT 00027, 105, 204, 'Estação 26', 587236, 597145 FROM dual
-     UNION ALL SELECT 00028, 105, 204, 'Estação 27', 587236, 597145 FROM dual
-     UNION ALL SELECT 00029, 100, 205, 'Estação 28', 587236, 597145 FROM dual
-     UNION ALL SELECT 00030, 100, 205, 'Estação 29', 587236, 597145 FROM dual
-     UNION ALL SELECT 00031, 100, 205, 'Estação 30', 587236, 597145 FROM dual
-     UNION ALL SELECT 00032, 100, 205, 'Estação 31', 587236, 597145 FROM dual
-     UNION ALL SELECT 00033, 100, 205, 'Estação 32', 587236, 597145 FROM dual
-     UNION ALL SELECT 00034, 100, 201, 'Estação 33', 587236, 597145 FROM dual
-     UNION ALL SELECT 00035, 100, 201, 'Estação 34', 587236, 597145 FROM dual
- ;
- 
-INSERT INTO PostoPluviometrico_Acude(idAcude,idPostoPluviometrico)
- 
- 
-     SELECT           200 ,1   FROM dual
-     UNION ALL SELECT 200, 00001   FROM dual
-     UNION ALL SELECT 200, 00001   FROM dual
-     UNION ALL SELECT 200, 00001   FROM dual
-     UNION ALL SELECT 201, 00001   FROM dual
-     UNION ALL SELECT 201, 00002   FROM dual
-     UNION ALL SELECT 201, 00002   FROM dual
-     UNION ALL SELECT 202, 00002   FROM dual
-     UNION ALL SELECT 202, 00002   FROM dual
-     UNION ALL SELECT 202, 00002   FROM dual
-     UNION ALL SELECT 203, 00002   FROM dual
-     UNION ALL SELECT 203, 00003   FROM dual
-     UNION ALL SELECT 203, 00003   FROM dual
-     UNION ALL SELECT 204, 00003   FROM dual
-     UNION ALL SELECT 204, 00004   FROM dual
-     UNION ALL SELECT 204, 00004   FROM dual
-     UNION ALL SELECT 205, 00004   FROM dual
-     UNION ALL SELECT 205, 00004   FROM dual
-     UNION ALL SELECT 205, 00004   FROM dual
-   
- ;
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (1,'rio 1', 'indicativo 1', 3);
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (2,'rio 2', 'indicativo 2', 1);
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (3,'rio 3', 'indicativo 3', 5);
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (4,'rio 4', 'indicativo 4', 4);
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (5,'rio 5', 'indicativo 5', 4);
+INSERT INTO Rio(idRio, nome, indicativo, idBacia) VALUES (6,'rio 6', 'indicativo 6', 3);
 
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (1,'Coremas', 854151, 16541, 353, 1);
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (2,'Bodocongó', 332525, 65, 5, 1);
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (3,'Boqueirão', 1123, 353, 3, 6);
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (4,'Acauã', 122, 3838, 2525, 4);
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (5,'Congo', 8666, 83, 353, 2);
+INSERT INTO Acude(idAcude, nome, volumeMaximo, comprimento, area, idRio) VALUES (6,'São Gonçalo', 776, 869, 3838, 1);
 
+INSERT INTO MedicaoCotaDiaria(idMedicaoDiaria, cotaAtual, datas, matricula, idAcude) VALUES (1,55115, '01/02/2018', 1,  3);
+INSERT INTO MedicaoCotaDiaria(idMedicaoDiaria, cotaAtual, datas, matricula, idAcude) VALUES (2,227, '07/01/2018', 2,  4);
+INSERT INTO MedicaoCotaDiaria(idMedicaoDiaria, cotaAtual, datas, matricula, idAcude) VALUES (3,333, '13/01/2018', 2,  6);
+INSERT INTO MedicaoCotaDiaria(idMedicaoDiaria, cotaAtual, datas, matricula, idAcude) VALUES (4,4444, '03/01/2018', 1,  1);
+INSERT INTO MedicaoCotaDiaria(idMedicaoDiaria, cotaAtual, datas, matricula, idAcude) VALUES (5,83838, '23/01/2018', 5,  1);
 
-INSERT INTO MedicaoCotaDiaria (idMedicaoDiaria, cotaAtual, datas, matricula, idAcude)
+INSERT INTO CotaAreaVolume(id, cota, area, volume, idAcude) VALUES (1,83838, 181851, 686,  1);
+INSERT INTO CotaAreaVolume(id, cota, area, volume, idAcude) VALUES (2,2828, 3833, 5485,  1);
+INSERT INTO CotaAreaVolume(id, cota, area, volume, idAcude) VALUES (3,433, 866, 8,  5);
+INSERT INTO CotaAreaVolume(id, cota, area, volume, idAcude) VALUES (4,8383, 6789389, 696,  3);
+INSERT INTO CotaAreaVolume(id, cota, area, volume, idAcude) VALUES (5,838823738, 28228, 55,  1);
 
+INSERT INTO PostoPluviometrico_Acude(idAcude, idPostoPluviometrico) VALUES (1,1);
+INSERT INTO PostoPluviometrico_Acude(idAcude, idPostoPluviometrico) VALUES (1,4);
+INSERT INTO PostoPluviometrico_Acude(idAcude, idPostoPluviometrico) VALUES (2,3);
+INSERT INTO PostoPluviometrico_Acude(idAcude, idPostoPluviometrico) VALUES (1,5);
+INSERT INTO PostoPluviometrico_Acude(idAcude, idPostoPluviometrico) VALUES (4,4);
 
-    SELECT 0001, 3, '12/04/2011', 00003, 201 FROM dual 
-    UNION ALL SELECT 0002, 5, '12/04/2011', 00004, 200 FROM dual
-    UNION ALL SELECT 0003, 8, '12/04/2011', 00001, 201 FROM dual
-    UNION ALL SELECT 0004, 9, '12/04/2011', 00002, 202 FROM dual
+INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (1,'estacao 1', 28228, 55,  1, 1);
+INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (2,'estacao 2', 147, 3535,  2, 5);
+INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (3,'estacao 3', 252, 28,  5, 3);
+INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (4,'estacao 4', 8686, 822,  4, 1);
+INSERT INTO EstacaoDeQualidade(idEstacaoQualidade, nome, latitude, longitude, idRio, idAcude) VALUES (5,'estacao 5', 777, 3535,  4, 2);
 
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (1,'01/02/2018', 4, 7,  8, 3,4,1,1);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (2,'07/01/2018', 5, 6,  7, 4,5,4,3);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (3,'17/01/2017', 6, 5,  6, 5,5,2,5);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (4,'11/01/2018', 7, 4,  5, 6,4,4,2);
+INSERT INTO MedicaoRio(idMedicaoRio, data, pH, DBO, turbidez, oxigenio, alcalinidade, idRio, idEstacaoQualidade) VALUES (5,'31/01/2018', 8, 3,  4, 7,4,1,2);
 
-
-
-;
+INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (1,'01/01/2018', 4, 7,  8, 3,4,1,1);
+INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (2,'06/01/2018', 5, 6,  7, 4,5,4,3);
+INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (3,'07/01/2018', 6, 5,  6, 5,5,2,5);
+INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (4,'17/01/2018', 7, 4,  5, 6,4,4,2);
+INSERT INTO MedicaoAcude(idMedicaoAcude, data, pH, DBO, turbidez, oxigenio, alcalinidade, idAcude, idEstacaoQualidade) VALUES (5,'01/02/2018', 8, 3,  4, 7,4,1,2);
