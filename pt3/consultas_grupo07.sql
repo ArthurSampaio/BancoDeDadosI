@@ -19,13 +19,16 @@ ORDER BY VOLUMEMAXIMO, COMPRIMENTO DESC;
 
 SELECT MIN(PERIMETRO) AS MenorPerimetro FROM Bacia;
 
-/* 5. Qual o nome do usuário que mais realizou medições puviométricas, e quantas foram?
-    FALTA CONCLUIR (RESTRINGIR PARA UM UNICO USUARIO)*/
-SELECT u.nome, COUNT(*)
+/* 5. Qual o nome do usuário que mais realizou medições puviométricas, e quantas foram?*/
+SELECT nome, COUNT(*)
 	FROM usuario u, MedicaoPluviometrica m
-	WHERE (m.matricula = u.matricula) 
+    WHERE (m.matricula = u.matricula) 
 	GROUP BY u.nome
-
+    HAVING COUNT(*) = (SELECT MAX(COUNT(*))
+                             FROM MEDICAOPLUVIOMETRICA 
+                          GROUP BY MATRICULA)
+ 
+; 
 
 /*6. Liste os valores de alcalinidade medidos para o rio X entre os dias 02/10/2017 e 22/11/2017*/
 
